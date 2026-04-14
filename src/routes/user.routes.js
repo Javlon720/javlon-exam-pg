@@ -5,23 +5,21 @@ import { checkUser, createUser, checkUserId, getFullDate } from "../db/user.db.j
 import { postSignup, postSignin, getUserId } from "../schema/users.schema.js"
 
 export default async function userRoutes(fastify) {
-    fastify.get('/users', {
-        schema: getUserId
-    }, async (req, reply) => {
+  fastify.get('/users', {
+    schema: getUserId
+}, async (req, reply) => {
+    const { user_id, page, count } = req.query
 
-        const { user_id, page, count } = req.query
+    const adminUser = await query(checkUserId, user_id)
 
-        const adminUser = await query(checkUserId, user_id)
-        console.log(adminUser.rows[0] );
-        
-        if ((adminUser.rows[0])) {
-            return reply.code(200).send({ admin_is: `${adminUser.rows[0] || false} siz admin emassiz` })
-        }
+    if (!adminUser.rows[0]?.is_admin) {
+        return reply.code(403).send({ message: "siz admin emassiz" })
+    }
 
-        const result = await query(getFullDate, page, count)
-        return reply.code(200).send(result.rows)
+    const result = await query(getFullDate, page, count)
+    return reply.code(200).send(result.rows)
+})
 
-    })
 
     fastify.post('/signup', {
 
