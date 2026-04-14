@@ -23,7 +23,7 @@ export default async function userRoutes(fastify) {
 
     })
 
-    fastify.post('/register', {
+    fastify.post('/signup', {
 
         schema: {
             body: postSignup
@@ -53,7 +53,7 @@ export default async function userRoutes(fastify) {
     ),
 
 
-        fastify.post('/login',
+        fastify.post('/signin',
             {
                 schema: postSignin
             },
