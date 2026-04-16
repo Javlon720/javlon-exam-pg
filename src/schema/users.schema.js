@@ -1,6 +1,6 @@
 export const postSignup = {
     type: 'object',
-    required: ['email', "password", "is_admin"],
+    required: ['email', "password", "age", "gender", "name"],
     properties: {
         name: { type: "string" },
         email: { type: 'string', format: "email" },
@@ -25,9 +25,9 @@ export const postSignin = {
 export const getUserId = {
     querystring: {
         type: 'object',
+        required: ["page", "count"],
         properties: {
             page: { type: "integer", default: 1 },
-            user_id: { type: 'integer' },
             count: { type: 'integer', default: 10 }
         }
     }

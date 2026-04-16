@@ -11,7 +11,7 @@ where email=$1`
 
 
 export const checkUserId = `
- select  id is_admin from users 
+ select  is_admin from users 
 where id=$1`
 
 export const getFullDate = `

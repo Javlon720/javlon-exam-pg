@@ -7,4 +7,5 @@ export const config = {
     pg_user: process.env.PG_USER,
     pg_password: process.env.PG_PASSWORD,
     pg_database: process.env.PG_DBNAME,
+    jwt_secret: process.env.JWT_SECRET || "change-me-in-env",
 }
